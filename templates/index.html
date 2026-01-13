@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="hero">
+    <div class="card hero-main">
+      <div class="h-eyebrow"><span class="dot"></span>Minimal MVP • Fast shipping</div>
+      <h1>Dress better.<br/>Waste less.</h1>
+      <p class="lead">
+        VRSA helps you decide what to wear using your wardrobe, then guides you to smarter choices.
+        This is the MVP UI shell — next we wire it to the API.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="{{ url_for('ui_outfit') }}">Generate an outfit</a>
+        <a class="btn btn-secondary" href="{{ url_for('ui_wardrobe') }}">Add wardrobe items</a>
+      </div>
+    </div>
+
+    <div class="card hero-side">
+      <div class="kpis">
+        <div class="kpi">
+          <strong>Today</strong>
+          <span>1 outfit, 0 stress</span>
+        </div>
+        <div class="kpi">
+          <strong>Wardrobe</strong>
+          <span>Start with 10 items</span>
+        </div>
+        <div class="kpi">
+          <strong>Signal</strong>
+          <span>Wear what you own</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Core pages</div>
+  <div class="grid">
+    <div class="card feature">
+      <div class="badge">Wardrobe</div>
+      <h3>Store your essentials</h3>
+      <p>Add tops, bottoms, shoes, outerwear. Simple attributes now; richer tagging later.</p>
+      <div class="actions">
+        <a class="btn btn-secondary" href="{{ url_for('ui_wardrobe') }}">Open Wardrobe</a>
+      </div>
+    </div>
+
+    <div class="card feature">
+      <div class="badge">Outfits</div>
+      <h3>Get a recommendation</h3>
+      <p>Occasion + temperature → clean outfit card. Rule-based for MVP; AI later.</p>
+      <div class="actions">
+        <a class="btn btn-secondary" href="{{ url_for('ui_outfit') }}">Open Outfit</a>
+      </div>
+    </div>
+
+    <div class="card feature">
+      <div class="badge">History</div>
+      <h3>Track what you wore</h3>
+      <p>Simple log to measure whether recommendations are actually being used.</p>
+      <div class="actions">
+        <a class="btn btn-secondary" href="{{ url_for('ui_history') }}">Open History</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

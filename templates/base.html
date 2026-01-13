@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or "VRSA" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="{{ url_for('ui_index') }}">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brand-title">
+          <strong>VRSA</strong>
+          <span>Your wardrobe, reimagined</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="{{ url_for('ui_wardrobe') }}">Wardrobe</a>
+        <a href="{{ url_for('ui_outfit') }}">Outfit</a>
+        <a href="{{ url_for('ui_history') }}">History</a>
+        <a href="{{ url_for('ui_login') }}">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    {% block content %}{% endblock %}
+    <div class="footer">
+      <div class="pill">Palette: #683D2E • #B49C80 • #CEA27D • #ECCBB9 • #637738</div>
+      <div class="pill">MVP UI Shell</div>
+    </div>
+  </div>
+</body>
+</html>
