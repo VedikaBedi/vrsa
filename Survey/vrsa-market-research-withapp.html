@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRSA Market Research</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #CEA27D 0%, #ECCBB9 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .container.fullscreen {
+            max-width: 100%;
+            height: 100vh;
+            border-radius: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #8B5A3C;
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #ECCBB9;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #8B5A3C;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            color: #8B5A3C;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .question-subtext {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .required-mark {
+            color: #d63031;
+            margin-left: 3px;
+        }
+
+        .optional-mark {
+            color: #999;
+            font-size: 14px;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+
+        .option {
+            display: block;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            background: #f8f8f8;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .option:hover {
+            background: #ECCBB9;
+            border-color: #CEA27D;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .option.selected {
+            background: #ECCBB9;
+            border-color: #8B5A3C;
+            font-weight: 500;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ECCBB9;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input[type="email"]:focus,
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #CEA27D;
+        }
+
+        .scale-question {
+            margin-bottom: 30px;
+        }
+
+        .scale-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            gap: 8px;
+        }
+
+        .scale-option {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .scale-option input[type="radio"] {
+            margin-bottom: 8px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .scale-option span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .scale-option.selected span {
+            color: #8B5A3C;
+            font-weight: 600;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            background: #8B5A3C;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover:not(:disabled) {
+            background: #6D4830;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .secondary-button {
+            background: white;
+            color: #8B5A3C;
+            border: 2px solid #8B5A3C;
+        }
+
+        .secondary-button:hover {
+            background: #f8f8f8;
+        }
+
+        .bored-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .bored-link a {
+            color: #999;
+            font-size: 14px;
+            text-decoration: none;
+            border-bottom: 1px dashed #999;
+        }
+
+        .bored-link a:hover {
+            color: #8B5A3C;
+            border-bottom-color: #8B5A3C;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #8B5A3C 0%, #6D4830 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .cta-box h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .cta-box ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .cta-box li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .cta-box .steps {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* App Embed Styles */
+        .app-container {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            background: #8B5A3C;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .app-header h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .app-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .app-iframe-wrapper {
+            flex: 1;
+            position: relative;
+            background: #f5f5f5;
+            min-height: 600px;
+        }
+
+        .app-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 600px;
+        }
+
+        .app-footer {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid #ECCBB9;
+        }
+
+        .app-footer button {
+            max-width: 400px;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-message h2 {
+            color: #8B5A3C;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .success-message p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .emoji {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .container.fullscreen {
+                padding: 0;
+            }
+
+            .logo img {
+                width: 100px;
+            }
+
+            .page-title {
+                font-size: 20px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .option {
+                padding: 12px 15px;
+                font-size: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .scale-container {
+                gap: 4px;
+            }
+
+            .scale-option span {
+                font-size: 14px;
+            }
+
+            .scale-labels {
+                font-size: 11px;
+            }
+
+            .app-iframe {
+                min-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <div class="logo">
+            <img src="LogoV1_nobg.png" alt="VRSA Logo">
+            <p class="tagline">Wear With All.</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+
+        <form id="surveyForm">
+            <!-- PAGE 1: The Problem -->
+            <div class="page active" data-page="1">
+                <h2 class="page-title">Quick check-in 👋</h2>
+                <p class="page-subtitle">Help us understand your wardrobe struggles (takes 2 mins)</p>
+
+                <div class="question">
+                    <div class="question-text">How often do you feel like you have "nothing to wear"?</div>
+                    <label class="option">
+                        <input type="radio" name="nothing_to_wear" value="daily" required>
+                        Daily
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="nothing_to_wear" value="few-times-week">
+                        Few times a week
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="nothing_to_wear" value="few-times-month">
+                        Few times a month
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="nothing_to_wear" value="rarely">
+                        Rarely
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">How long does it take you to decide what to wear each morning?</div>
+                    <label class="option">
+                        <input type="radio" name="time_deciding" value="under-5" required>
+                        Under 5 minutes
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="time_deciding" value="5-15">
+                        5-15 minutes
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="time_deciding" value="15-30">
+                        15-30 minutes
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="time_deciding" value="over-30">
+                        Over 30 minutes
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">What's your biggest wardrobe struggle?</div>
+                    <label class="option">
+                        <input type="radio" name="biggest_struggle" value="dont-know-suits" required>
+                        Don't know what suits me
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="biggest_struggle" value="cant-put-outfits">
+                        Can't put outfits together
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="biggest_struggle" value="buy-never-wear">
+                        Buy things I never wear
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="biggest_struggle" value="sustainable-but-how">
+                        Want to be sustainable but don't know how
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="biggest_struggle" value="too-much-choice">
+                        Too much choice, no clarity
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">How much have you spent on clothes you rarely wear in the past year?</div>
+                    <label class="option">
+                        <input type="radio" name="wasted_spend" value="under-100" required>
+                        Under £100
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="wasted_spend" value="100-500">
+                        £100-500
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="wasted_spend" value="500-1000">
+                        £500-1,000
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="wasted_spend" value="over-1000">
+                        Over £1,000
+                    </label>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="next-button">Continue →</button>
+                </div>
+
+                <div class="bored-link">
+                    <a href="#" class="submit-partial">I'm bored → Submit what I've answered</a>
+                </div>
+            </div>
+
+            <!-- PAGE 2: Your Fashion Life -->
+            <div class="page" data-page="2">
+                <h2 class="page-title">Your Fashion Life 👔</h2>
+                <p class="page-subtitle">Tell us a bit about how you shop and get inspired</p>
+
+                <div class="question">
+                    <div class="question-text">Which type sounds most like you?</div>
+                    <label class="option">
+                        <input type="radio" name="user_type" value="everyday-professional" required>
+                        Everyday Professional (want to look polished, no stress)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="user_type" value="sustainability-seeker">
+                        Sustainability Seeker (care about ethical fashion)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="user_type" value="trend-follower">
+                        Trend Follower (love trends, hate overbuying)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="user_type" value="practical-minimalist">
+                        Practical Minimalist (want simple, reliable wardrobe)
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Where do you get outfit inspiration?</div>
+                    <label class="option">
+                        <input type="radio" name="inspiration_source" value="instagram-tiktok" required>
+                        Instagram/TikTok
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="inspiration_source" value="pinterest">
+                        Pinterest
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="inspiration_source" value="friends">
+                        Friends
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="inspiration_source" value="just-guess">
+                        I just guess
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="inspiration_source" value="fashion-apps">
+                        Fashion apps
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">How do you usually shop?</div>
+                    <label class="option">
+                        <input type="radio" name="shopping_habit" value="mostly-new" required>
+                        Mostly new (high street)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="shopping_habit" value="mix-new-secondhand">
+                        Mix of new and second-hand
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="shopping_habit" value="mostly-secondhand">
+                        Mostly second-hand
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="shopping_habit" value="rarely-shop">
+                        Rarely shop
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">How important is sustainability when you shop?</div>
+                    <label class="option">
+                        <input type="radio" name="sustainability_importance" value="top-priority" required>
+                        Top priority
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="sustainability_importance" value="important-not-practical">
+                        Important but not always practical
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="sustainability_importance" value="nice-to-have">
+                        Nice to have
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="sustainability_importance" value="not-factor">
+                        Not a factor
+                    </label>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="secondary-button prev-button">← Back</button>
+                    <button type="button" class="next-button">Continue →</button>
+                </div>
+
+                <div class="bored-link">
+                    <a href="#" class="submit-partial">I'm bored → Submit what I've answered</a>
+                </div>
+            </div>
+
+            <!-- PAGE 3: The Solution & Value -->
+            <div class="page" data-page="3">
+                <h2 class="page-title">The Solution 💡</h2>
+                <p class="page-subtitle">Would you actually use something like this?</p>
+
+                <div class="question">
+                    <div class="question-text">Which ONE feature would make you actually use this app?</div>
+                    <label class="option">
+                        <input type="radio" name="killer_feature" value="daily-outfit-suggestions" required>
+                        Daily outfit suggestions (weather + calendar aware)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="killer_feature" value="smart-shopping">
+                        Smart shopping (only suggests wardrobe gaps)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="killer_feature" value="sustainability-scores">
+                        Sustainability scores + second-hand options
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="killer_feature" value="swipe-trends">
+                        Swipe trends (teach it your style)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="killer_feature" value="all-sound-good">
+                        All sound good
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Would you pay for an app like this?</div>
+                    <label class="option">
+                        <input type="radio" name="would_pay" value="yes-definitely" required>
+                        Yes, definitely
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="would_pay" value="maybe-depends">
+                        Maybe, depends on price
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="would_pay" value="probably-not">
+                        Probably not
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="would_pay" value="no">
+                        No
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">If you would pay, what's a reasonable monthly price?</div>
+                    <label class="option">
+                        <input type="radio" name="price_point" value="under-3" required>
+                        Under £3/month
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="price_point" value="3-5">
+                        £3-£5/month
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="price_point" value="5-10">
+                        £5-£10/month
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="price_point" value="over-10">
+                        Over £10/month
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="price_point" value="wouldnt-pay">
+                        I wouldn't pay
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Your email <span class="optional-mark">(optional)</span></div>
+                    <div class="question-subtext">So we can keep you updated on VRSA's launch</div>
+                    <input type="email" name="email_optional" placeholder="your.email@example.com">
+                </div>
+
+                <div class="scale-question">
+                    <div class="question-text">On a scale of 1-10, how likely would you be to download this app when it launches? <span class="required-mark">*</span></div>
+                    <div class="scale-container">
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="1" required>
+                            <span>1</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="2">
+                            <span>2</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="3">
+                            <span>3</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="4">
+                            <span>4</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="5">
+                            <span>5</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="6">
+                            <span>6</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="7">
+                            <span>7</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="8">
+                            <span>8</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="9">
+                            <span>9</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_scale" value="10">
+                            <span>10</span>
+                        </label>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Definitely not</span>
+                        <span>I want it yesterday!</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="secondary-button prev-button">← Back</button>
+                    <button type="button" class="next-button">Continue →</button>
+                </div>
+
+                <div class="bored-link">
+                    <a href="#" class="submit-partial">I'm bored → Submit what I've answered</a>
+                </div>
+            </div>
+
+            <!-- PAGE 4: Try VRSA CTA -->
+            <div class="page" data-page="4">
+                <h2 class="page-title">Want to actually try VRSA? 🎁</h2>
+                
+                <div class="cta-box">
+                    <h3>We built it - try for 5 minutes and get:</h3>
+                    <ul>
+                        <li><strong>£25 Amazon voucher</strong> (for feedback)</li>
+                        <li><strong>Chance to meet the founders</strong></li>
+                        <li><strong>Early access before launch</strong></li>
+                    </ul>
+                    
+                    <div class="steps">
+                        <strong>What happens:</strong><br>
+                        1. Click "Try VRSA" below<br>
+                        2. Upload 3-5 clothes items<br>
+                        3. Get AI outfit suggestions<br>
+                        4. Give quick feedback<br>
+                        5. Get your voucher
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Interested in trying VRSA?</div>
+                    <label class="option">
+                        <input type="radio" name="try_vrsa" value="yes-try-now" required>
+                        Yes! Take me to VRSA now
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="try_vrsa" value="yes-later">
+                        Yes, but email me the link later
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="try_vrsa" value="no-thanks">
+                        No thanks, just submit my survey
+                    </label>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Your email (for the voucher & updates):</div>
+                    <input type="email" name="email_voucher" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="secondary-button prev-button">← Back</button>
+                    <button type="button" class="next-button">Continue →</button>
+                </div>
+            </div>
+
+            <!-- PAGE 5: App Demo (Embedded) -->
+            <div class="page" data-page="5">
+                <div class="app-container">
+                    <div class="app-header">
+                        <h2>Try VRSA ✨</h2>
+                        <p>Explore the app - take your time!</p>
+                    </div>
+                    <div class="app-iframe-wrapper">
+                        <iframe 
+                            id="vrsaAppIframe" 
+                            class="app-iframe" 
+                            src="https://vrsa-style-ai.base44.app/Home"
+                            allow="camera; microphone; geolocation"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="app-footer">
+                        <button type="button" class="done-with-app-button">Done Exploring → Give Feedback</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 6: Final Feedback -->
+            <div class="page" data-page="6">
+                <h2 class="page-title">Your Thoughts on VRSA 💭</h2>
+                <p class="page-subtitle">Almost done! Just a few quick questions about what you saw</p>
+
+                <div class="question">
+                    <div class="question-text">After trying VRSA, how do you feel about it?</div>
+                    <label class="option">
+                        <input type="radio" name="app_impression" value="love-it" required>
+                        Love it! I'd use this
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="app_impression" value="pretty-good">
+                        Pretty good, needs some work
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="app_impression" value="meh">
+                        Meh, not for me
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="app_impression" value="disappointed">
+                        Disappointed, expected more
+                    </label>
+                </div>
+
+                <div class="scale-question">
+                    <div class="question-text">Now that you've seen it, how likely are you to download VRSA? <span class="required-mark">*</span></div>
+                    <div class="scale-container">
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="1" required>
+                            <span>1</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="2">
+                            <span>2</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="3">
+                            <span>3</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="4">
+                            <span>4</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="5">
+                            <span>5</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="6">
+                            <span>6</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="7">
+                            <span>7</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="8">
+                            <span>8</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="9">
+                            <span>9</span>
+                        </label>
+                        <label class="scale-option">
+                            <input type="radio" name="likelihood_after_demo" value="10">
+                            <span>10</span>
+                        </label>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Definitely not</span>
+                        <span>Sign me up now!</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">What did you LOVE about VRSA? <span class="optional-mark">(optional)</span></div>
+                    <textarea name="loved_features" placeholder="Tell us what stood out..."></textarea>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">What did you HATE or find confusing? <span class="optional-mark">(optional)</span></div>
+                    <textarea name="disliked_features" placeholder="Be honest - we want to improve!"></textarea>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Any other thoughts or suggestions?</div>
+                    <textarea name="final_thoughts" placeholder="Anything else we should know..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="secondary-button prev-button">← Back</button>
+                    <button type="submit" id="finalSubmitBtn">Submit & Claim Voucher →</button>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="emoji">🎉</div>
+                <h2>Thank you!</h2>
+                <p>Your feedback has been recorded and is incredibly valuable to us.</p>
+                <p style="margin-top: 20px; font-weight: 500;" id="successAction"></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9svbu_UTffO6zRCSspOqACXEgTqyjilkogILqSpauuK0Lu2tgWSL3DrJrrJNdgVhN/exec';
+
+        let currentPage = 1;
+        const totalPages = 6;
+
+        // Handle option selection visual feedback
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const input = this.querySelector('input');
+                const name = input.name;
+                
+                // Remove selected class from all options with same name
+                document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+                    inp.closest('.option').classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                input.checked = true;
+            });
+        });
+
+        // Handle scale selection visual feedback
+        document.querySelectorAll('.scale-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const input = this.querySelector('input');
+                const name = input.name;
+                
+                // Remove selected class from all scale options with same name
+                document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+                    inp.closest('.scale-option').classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                input.checked = true;
+            });
+        });
+
+        // Navigation
+        function updateProgress() {
+            const progress = ((currentPage - 1) / (totalPages - 1)) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showPage(pageNum) {
+            const container = document.getElementById('mainContainer');
+            
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.querySelector(`[data-page="${pageNum}"]`).classList.add('active');
+            currentPage = pageNum;
+            updateProgress();
+            
+            // Make container fullscreen for app page
+            if (pageNum === 5) {
+                container.classList.add('fullscreen');
+            } else {
+                container.classList.remove('fullscreen');
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Next button - handle Page 4 special logic
+        document.querySelectorAll('.next-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const currentPageEl = document.querySelector('.page.active');
+                const pageNumber = parseInt(currentPageEl.getAttribute('data-page'));
+                const inputs = currentPageEl.querySelectorAll('input[required], textarea[required]');
+                let allFilled = true;
+                
+                // Check radio buttons
+                const radioNames = [...new Set(Array.from(inputs).filter(i => i.type === 'radio').map(i => i.name))];
+                radioNames.forEach(name => {
+                    const checked = currentPageEl.querySelector(`input[name="${name}"]:checked`);
+                    if (!checked) {
+                        allFilled = false;
+                    }
+                });
+
+                // Check text/email inputs
+                const textInputs = Array.from(inputs).filter(i => i.type === 'email' || i.type === 'text' || i.tagName === 'TEXTAREA');
+                textInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        allFilled = false;
+                    }
+                });
+
+                if (!allFilled) {
+                    alert('Please answer all questions before continuing');
+                    return;
+                }
+
+                // Special logic for Page 4 - route based on selection
+                if (pageNumber === 4) {
+                    const tryVrsaValue = document.querySelector('input[name="try_vrsa"]:checked').value;
+                    
+                    if (tryVrsaValue === 'yes-try-now') {
+                        showPage(5); // Go to app
+                    } else {
+                        showPage(6); // Skip to final questions
+                    }
+                } else if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            });
+        });
+
+        // Previous button
+        document.querySelectorAll('.prev-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            });
+        });
+
+        // Done with app button
+        document.querySelector('.done-with-app-button').addEventListener('click', function() {
+            showPage(6); // Go to final questions
+        });
+
+        // Submit partial
+        document.querySelectorAll('.submit-partial').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Submit your answers so far? You can always come back later!')) {
+                    submitForm(true);
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitForm(false);
+        });
+
+        async function submitForm(partial = false) {
+            const submitBtn = document.getElementById('finalSubmitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+            }
+
+            const formData = new FormData(document.getElementById('surveyForm'));
+            const data = {
+                timestamp: new Date().toISOString(),
+                partial_response: partial
+            };
+
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Hide all pages
+                    document.querySelectorAll('.page').forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    
+                    // Show success message
+                    const successMessage = document.getElementById('successMessage');
+                    const successAction = document.getElementById('successAction');
+                    
+                    const tryVrsa = data.try_vrsa;
+                    if (tryVrsa === 'yes-try-now' || tryVrsa === 'yes-later') {
+                        successAction.innerHTML = '🎁 Check your email for your £25 Amazon voucher!<br><br>We\'ll also send you early access when VRSA launches.';
+                    } else {
+                        successAction.innerHTML = 'We\'ll keep you updated on VRSA\'s progress. Stay tuned!';
+                    }
+                    
+                    successMessage.classList.add('active');
+                    document.getElementById('mainContainer').classList.remove('fullscreen');
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                alert('Oops! Something went wrong. Please try again or email your responses to hello@vrsa.com');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit & Claim Voucher →';
+                }
+            }
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
