@@ -821,7 +821,7 @@
 
     <div class="question">
         <div class="question-text">Your email (for the voucher & updates):</div>
-        <input type="email" name="email_voucher" id="emailVoucherField" placeholder="your.email@example.com" required>
+        <input type="email" name="email_voucher" id="emailVoucherField" placeholder="your.email@example.com">
     </div>
 
     <input type="hidden" name="try_vrsa" value="yes-try-now">
@@ -1044,18 +1044,21 @@
                     }
                 });
 
-                // Check text/email inputs
-                const textInputs = Array.from(inputs).filter(i => i.type === 'email' || i.type === 'text' || i.tagName === 'TEXTAREA');
-                textInputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        allFilled = false;
-                    }
-                });
+                // Check text/email inputs (including non-required ones on Page 4)
+const textInputs = Array.from(inputs).filter(i => i.type === 'email' || i.type === 'text' || i.tagName === 'TEXTAREA');
+textInputs.forEach(input => {
+    if (!input.value.trim()) {
+        allFilled = false;
+    }
+});
 
-                if (!allFilled) {
-                    alert('Please answer all questions before continuing');
-                    return;
-                }
+// Special check for Page 4 email
+if (pageNumber === 4) {
+    const emailField = document.getElementById('emailVoucherField');
+    if (!emailField || !emailField.value.trim()) {
+        allFilled = false;
+    }
+}
 
                 // Special logic for Page 4 - always go to app
 if (pageNumber === 4) {
