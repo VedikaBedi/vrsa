@@ -273,23 +273,6 @@
             background: #f8f8f8;
         }
 
-        .bored-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .bored-link a {
-            color: #999;
-            font-size: 14px;
-            text-decoration: none;
-            border-bottom: 1px dashed #999;
-        }
-
-        .bored-link a:hover {
-            color: #8B5A3C;
-            border-bottom-color: #8B5A3C;
-        }
-
         .cta-box {
             background: linear-gradient(135deg, #8B5A3C 0%, #6D4830 100%);
             color: white;
@@ -321,7 +304,6 @@
             font-size: 14px;
         }
 
-        /* App Embed Styles */
         .app-container {
             background: white;
             border-radius: 20px;
@@ -461,7 +443,7 @@
         </div>
 
         <form id="surveyForm">
-            <!-- PAGE 1: The Problem -->
+            <!-- PAGE 1 -->
             <div class="page active" data-page="1">
                 <h2 class="page-title">Quick check-in 👋</h2>
                 <p class="page-subtitle">Help us understand your wardrobe struggles (takes 2 mins)</p>
@@ -553,13 +535,9 @@
                 <div class="button-group">
                     <button type="button" class="next-button">Continue →</button>
                 </div>
-
-                <div class="bored-link">
-                    <a href="#" class="submit-partial">I'm bored → Submit what I've answered</a>
-                </div>
             </div>
 
-            <!-- PAGE 2: Your Fashion Life -->
+            <!-- PAGE 2 -->
             <div class="page" data-page="2">
                 <h2 class="page-title">Your Fashion Life 👔</h2>
                 <p class="page-subtitle">Tell us a bit about how you shop and get inspired</p>
@@ -652,13 +630,9 @@
                     <button type="button" class="secondary-button prev-button">← Back</button>
                     <button type="button" class="next-button">Continue →</button>
                 </div>
-
-                <div class="bored-link">
-                    <a href="#" class="submit-partial">I'm bored → Submit what I've answered</a>
-                </div>
             </div>
 
-            <!-- PAGE 3: The Solution & Value -->
+            <!-- PAGE 3 -->
             <div class="page" data-page="3">
                 <h2 class="page-title">The Solution 💡</h2>
                 <p class="page-subtitle">Would you actually use something like this?</p>
@@ -791,48 +765,44 @@
                     <button type="button" class="secondary-button prev-button">← Back</button>
                     <button type="button" class="next-button">Continue →</button>
                 </div>
+            </div>
 
-                <div class="bored-link">
-                    <a href="#" class="submit-partial">I'm bored → Submit what I've answered</a>
+            <!-- PAGE 4 -->
+            <div class="page" data-page="4">
+                <h2 class="page-title">Try VRSA 🎁</h2>
+                
+                <div class="cta-box">
+                    <h3>Test out the app and answer a few questions about what you think!</h3>
+                    <ul>
+                        <li><strong>£25 Amazon voucher</strong> (for your feedback)</li>
+                        <li><strong>Chance to meet the founders</strong></li>
+                        <li><strong>Early access before launch</strong></li>
+                    </ul>
+                    
+                    <div class="steps">
+                        <strong>What happens:</strong><br>
+                        1. Upload 3-5 clothes items<br>
+                        2. Get AI outfit suggestions<br>
+                        3. Explore the app<br>
+                        4. Give quick feedback<br>
+                        5. Get your voucher
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Your email (for the voucher & updates):</div>
+                    <input type="email" name="email_voucher" id="emailVoucherField" placeholder="your.email@example.com">
+                </div>
+
+                <input type="hidden" name="try_vrsa" value="yes-try-now">
+
+                <div class="button-group">
+                    <button type="button" class="secondary-button prev-button">← Back</button>
+                    <button type="button" class="next-button">Try VRSA Now →</button>
                 </div>
             </div>
 
-            <!-- PAGE 4: Try VRSA CTA -->
-<div class="page" data-page="4">
-    <h2 class="page-title">Try VRSA 🎁</h2>
-    
-    <div class="cta-box">
-        <h3>Test out the app and answer a few questions about what you think!</h3>
-        <ul>
-            <li><strong>£25 Amazon voucher</strong> (for your feedback)</li>
-            <li><strong>Chance to meet the founders</strong></li>
-            <li><strong>Early access before launch</strong></li>
-        </ul>
-        
-        <div class="steps">
-            <strong>What happens:</strong><br>
-            1. Upload 3-5 clothes items<br>
-            2. Get AI outfit suggestions<br>
-            3. Explore the app<br>
-            4. Give quick feedback<br>
-            5. Get your voucher
-        </div>
-    </div>
-
-    <div class="question">
-        <div class="question-text">Your email (for the voucher & updates):</div>
-        <input type="email" name="email_voucher" id="emailVoucherField" placeholder="your.email@example.com">
-    </div>
-
-    <input type="hidden" name="try_vrsa" value="yes-try-now">
-
-    <div class="button-group">
-        <button type="button" class="secondary-button prev-button">← Back</button>
-        <button type="button" class="next-button">Try VRSA Now →</button>
-    </div>
-</div>
-
-            <!-- PAGE 5: App Demo (Embedded) -->
+            <!-- PAGE 5 -->
             <div class="page" data-page="5">
                 <div class="app-container">
                     <div class="app-header">
@@ -854,7 +824,7 @@
                 </div>
             </div>
 
-            <!-- PAGE 6: Final Feedback -->
+            <!-- PAGE 6 -->
             <div class="page" data-page="6">
                 <h2 class="page-title">Your Thoughts on VRSA 💭</h2>
                 <p class="page-subtitle">Almost done! Just a few quick questions about what you saw</p>
@@ -955,52 +925,42 @@
                 <div class="emoji">🎉</div>
                 <h2>Thank you!</h2>
                 <p>Your feedback has been recorded and is incredibly valuable to us.</p>
-                <p style="margin-top: 20px; font-weight: 500;" id="successAction"></p>
+                <p style="margin-top: 20px; font-weight: 500;">🎁 Check your email for your £25 Amazon voucher!<br><br>We'll also send you early access when VRSA launches.</p>
             </div>
         </form>
     </div>
 
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9svbu_UTffO6zRCSspOqACXEgTqyjilkogILqSpauuK0Lu2tgWSL3DrJrrJNdgVhN/exec';
-
         let currentPage = 1;
         const totalPages = 6;
 
-        // Handle option selection visual feedback
+        // Handle option selection
         document.querySelectorAll('.option').forEach(option => {
             option.addEventListener('click', function() {
                 const input = this.querySelector('input');
                 const name = input.name;
-                
-                // Remove selected class from all options with same name
                 document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
                     inp.closest('.option').classList.remove('selected');
                 });
-                
-                // Add selected class to clicked option
                 this.classList.add('selected');
                 input.checked = true;
             });
         });
 
-        // Handle scale selection visual feedback
+        // Handle scale selection
         document.querySelectorAll('.scale-option').forEach(option => {
             option.addEventListener('click', function() {
                 const input = this.querySelector('input');
                 const name = input.name;
-                
-                // Remove selected class from all scale options with same name
                 document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
                     inp.closest('.scale-option').classList.remove('selected');
                 });
-                
-                // Add selected class to clicked option
                 this.classList.add('selected');
                 input.checked = true;
             });
         });
 
-        // Navigation
         function updateProgress() {
             const progress = ((currentPage - 1) / (totalPages - 1)) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
@@ -1008,26 +968,22 @@
 
         function showPage(pageNum) {
             const container = document.getElementById('mainContainer');
-            
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            
             document.querySelector(`[data-page="${pageNum}"]`).classList.add('active');
             currentPage = pageNum;
             updateProgress();
             
-            // Make container fullscreen for app page
             if (pageNum === 5) {
                 container.classList.add('fullscreen');
             } else {
                 container.classList.remove('fullscreen');
             }
-            
             window.scrollTo(0, 0);
         }
 
-        // Next button - handle Page 4 special logic
+        // Next button
         document.querySelectorAll('.next-button').forEach(btn => {
             btn.addEventListener('click', function() {
                 const currentPageEl = document.querySelector('.page.active');
@@ -1039,68 +995,62 @@
                 const radioNames = [...new Set(Array.from(inputs).filter(i => i.type === 'radio').map(i => i.name))];
                 radioNames.forEach(name => {
                     const checked = currentPageEl.querySelector(`input[name="${name}"]:checked`);
-                    if (!checked) {
-                        allFilled = false;
-                    }
+                    if (!checked) allFilled = false;
                 });
 
-                // Check text/email inputs (including non-required ones on Page 4)
-const textInputs = Array.from(inputs).filter(i => i.type === 'email' || i.type === 'text' || i.tagName === 'TEXTAREA');
-textInputs.forEach(input => {
-    if (!input.value.trim()) {
-        allFilled = false;
-    }
-});
+                // Check text/email inputs
+                const textInputs = Array.from(inputs).filter(i => i.type === 'email' || i.type === 'text' || i.tagName === 'TEXTAREA');
+                textInputs.forEach(input => {
+                    if (!input.value.trim()) allFilled = false;
+                });
 
-// Special check for Page 4 email
-if (pageNumber === 4) {
-    const emailField = document.getElementById('emailVoucherField');
-    if (!emailField || !emailField.value.trim()) {
-        allFilled = false;
-    }
-}
+                // Special check for Page 4 email (not required but should be filled)
+                if (pageNumber === 4) {
+                    const emailField = document.getElementById('emailVoucherField');
+                    if (!emailField || !emailField.value.trim()) {
+                        allFilled = false;
+                    }
+                }
 
-                // Special logic for Page 4 - always go to app
-if (pageNumber === 4) {
-    showPage(5); // Go to app
-} else if (currentPage < totalPages) {
-    showPage(currentPage + 1);
-}
+                if (!allFilled) {
+                    alert('Please answer all questions before continuing');
+                    return;
+                }
+
+                if (pageNumber === 4) {
+                    showPage(5);
+                } else if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
             });
         });
 
         // Previous button
         document.querySelectorAll('.prev-button').forEach(btn => {
             btn.addEventListener('click', function() {
-                if (currentPage > 1) {
-                    showPage(currentPage - 1);
-                }
+                if (currentPage > 1) showPage(currentPage - 1);
             });
         });
 
         // Done with app button
-document.querySelector('.done-with-app-button').addEventListener('click', function() {
-    // Remove required from email_voucher since user already filled it on Page 4
-    const emailVoucherField = document.getElementById('emailVoucherField');
-    if (emailVoucherField) {
-        emailVoucherField.removeAttribute('required');
-    }
-    showPage(6); // Go to final questions
-});
-
-        // Submit partial
-        document.querySelectorAll('.submit-partial').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (confirm('Submit your answers so far? You can always come back later!')) {
-                    submitForm(true);
-                }
-            });
+        document.querySelector('.done-with-app-button').addEventListener('click', function() {
+            showPage(6);
         });
 
         // Form submission
         document.getElementById('surveyForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // CRITICAL FIX: Remove 'required' from all hidden pages to prevent validation errors
+            const currentPageElement = document.querySelector('.page.active');
+            document.querySelectorAll('.page').forEach(page => {
+                if (page !== currentPageElement) {
+                    page.querySelectorAll('input[required], textarea[required]').forEach(field => {
+                        field.removeAttribute('required');
+                    });
+                }
+            });
+            
             submitForm(false);
         });
 
@@ -1131,22 +1081,11 @@ document.querySelector('.done-with-app-button').addEventListener('click', functi
                 });
 
                 if (response.ok) {
-                    // Hide all pages
                     document.querySelectorAll('.page').forEach(page => {
                         page.style.display = 'none';
                     });
                     
-                    // Show success message
                     const successMessage = document.getElementById('successMessage');
-                    const successAction = document.getElementById('successAction');
-                    
-                    const tryVrsa = data.try_vrsa;
-                    if (tryVrsa === 'yes-try-now' || tryVrsa === 'yes-later') {
-                        successAction.innerHTML = '🎁 Check your email for your £25 Amazon voucher!<br><br>We\'ll also send you early access when VRSA launches.';
-                    } else {
-                        successAction.innerHTML = 'We\'ll keep you updated on VRSA\'s progress. Stay tuned!';
-                    }
-                    
                     successMessage.classList.add('active');
                     document.getElementById('mainContainer').classList.remove('fullscreen');
                 } else {
@@ -1161,7 +1100,6 @@ document.querySelector('.done-with-app-button').addEventListener('click', functi
             }
         }
 
-        // Initialize
         updateProgress();
     </script>
 </body>
