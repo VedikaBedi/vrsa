@@ -1057,23 +1057,12 @@
                     return;
                 }
 
-                // Special logic for Page 4 - route based on selection
-                if (pageNumber === 4) {
-                    const tryVrsaValue = document.querySelector('input[name="try_vrsa"]:checked').value;
-                    const emailVoucherField = document.getElementById('emailVoucherField');
-                    
-                    if (tryVrsaValue === 'yes-try-now') {
-                        showPage(5); // Go to app
-                    } else {
-                        // If not trying now, make email_voucher not required for final submission
-                        if (emailVoucherField) {
-                            emailVoucherField.removeAttribute('required');
-                        }
-                        showPage(6); // Skip to final questions
-                    }
-                } else if (currentPage < totalPages) {
-                    showPage(currentPage + 1);
-                }
+                // Special logic for Page 4 - always go to app
+if (pageNumber === 4) {
+    showPage(5); // Go to app
+} else if (currentPage < totalPages) {
+    showPage(currentPage + 1);
+}
             });
         });
 
