@@ -798,53 +798,39 @@
             </div>
 
             <!-- PAGE 4: Try VRSA CTA -->
-            <div class="page" data-page="4">
-                <h2 class="page-title">Want to actually try VRSA? 🎁</h2>
-                
-                <div class="cta-box">
-                    <h3>We built it - try for 5 minutes and get:</h3>
-                    <ul>
-                        <li><strong>£25 Amazon voucher</strong> (for feedback)</li>
-                        <li><strong>Chance to meet the founders</strong></li>
-                        <li><strong>Early access before launch</strong></li>
-                    </ul>
-                    
-                    <div class="steps">
-                        <strong>What happens:</strong><br>
-                        1. Click "Try VRSA" below<br>
-                        2. Upload 3-5 clothes items<br>
-                        3. Get AI outfit suggestions<br>
-                        4. Give quick feedback<br>
-                        5. Get your voucher
-                    </div>
-                </div>
+<div class="page" data-page="4">
+    <h2 class="page-title">Try VRSA 🎁</h2>
+    
+    <div class="cta-box">
+        <h3>Test out the app and answer a few questions about what you think!</h3>
+        <ul>
+            <li><strong>£25 Amazon voucher</strong> (for your feedback)</li>
+            <li><strong>Chance to meet the founders</strong></li>
+            <li><strong>Early access before launch</strong></li>
+        </ul>
+        
+        <div class="steps">
+            <strong>What happens:</strong><br>
+            1. Upload 3-5 clothes items<br>
+            2. Get AI outfit suggestions<br>
+            3. Explore the app<br>
+            4. Give quick feedback<br>
+            5. Get your voucher
+        </div>
+    </div>
 
-                <div class="question">
-                    <div class="question-text">Interested in trying VRSA?</div>
-                    <label class="option">
-                        <input type="radio" name="try_vrsa" value="yes-try-now" required>
-                        Yes! Take me to VRSA now
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="try_vrsa" value="yes-later">
-                        Yes, but email me the link later
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="try_vrsa" value="no-thanks">
-                        No thanks, just submit my survey
-                    </label>
-                </div>
+    <div class="question">
+        <div class="question-text">Your email (for the voucher & updates):</div>
+        <input type="email" name="email_voucher" id="emailVoucherField" placeholder="your.email@example.com" required>
+    </div>
 
-                <div class="question">
-                    <div class="question-text">Your email (for the voucher & updates):</div>
-                    <input type="email" name="email_voucher" id="emailVoucherField" placeholder="your.email@example.com" required>
-                </div>
+    <input type="hidden" name="try_vrsa" value="yes-try-now">
 
-                <div class="button-group">
-                    <button type="button" class="secondary-button prev-button">← Back</button>
-                    <button type="button" class="next-button">Continue →</button>
-                </div>
-            </div>
+    <div class="button-group">
+        <button type="button" class="secondary-button prev-button">← Back</button>
+        <button type="button" class="next-button">Try VRSA Now →</button>
+    </div>
+</div>
 
             <!-- PAGE 5: App Demo (Embedded) -->
             <div class="page" data-page="5">
