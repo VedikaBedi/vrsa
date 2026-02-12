@@ -837,7 +837,7 @@
 
                 <div class="question">
                     <div class="question-text">Your email (for the voucher & updates):</div>
-                    <input type="email" name="email_voucher" placeholder="your.email@example.com" required>
+                    <input type="email" name="email_voucher" id="emailVoucherField" placeholder="your.email@example.com" required>
                 </div>
 
                 <div class="button-group">
@@ -1074,10 +1074,15 @@
                 // Special logic for Page 4 - route based on selection
                 if (pageNumber === 4) {
                     const tryVrsaValue = document.querySelector('input[name="try_vrsa"]:checked').value;
+                    const emailVoucherField = document.getElementById('emailVoucherField');
                     
                     if (tryVrsaValue === 'yes-try-now') {
                         showPage(5); // Go to app
                     } else {
+                        // If not trying now, make email_voucher not required for final submission
+                        if (emailVoucherField) {
+                            emailVoucherField.removeAttribute('required');
+                        }
                         showPage(6); // Skip to final questions
                     }
                 } else if (currentPage < totalPages) {
